@@ -1,0 +1,1634 @@
+{
+  "meta": {
+    "dashboard": "Youth Justice Dashboard",
+    "generated": "2026-10-14 16:19 (local time)",
+    "built_by": "build_data.py",
+    "latest_year": 2025,
+    "pooled_period": "2023-2025",
+    "base_year": 2019,
+    "sources": {
+      "CUR-0010": {
+        "file": "CUR-0010_ao-jo-case-outcomes_ny-counties.csv",
+        "rows": 1870,
+        "md5": "c68de03e0787f74e21fde980b3049924"
+      },
+      "CUR-0011": {
+        "file": "CUR-0011_under-18-felony-arrests-by-race_ny-counties.csv",
+        "rows": 536,
+        "md5": "0cd175c3dfa84281b8fe4d3e6119c86a"
+      }
+    },
+    "boundaries": {
+      "file": "STG-0016_county-boundaries_nys.geojson",
+      "copied_to": "Geography.json",
+      "counties": 62,
+      "md5": "2c4c0e77331a950ad01aaa7e20748a7a"
+    }
+  },
+  "headlines": [
+    {
+      "id": "arrests",
+      "label": "Felony arrests of people under 18 statewide, 2025",
+      "value": 6395,
+      "unit": "count",
+      "compare": {
+        "label": "change since 2019",
+        "value": 10.1,
+        "unit": "change"
+      },
+      "source": "CUR-0011, felony_arrests and change_since_2019_pct"
+    },
+    {
+      "id": "criminal_court",
+      "label": "AO cases kept in criminal court statewide, 2025",
+      "value": 16.2,
+      "unit": "%",
+      "compare": null,
+      "source": "CUR-0010, pct_criminal_court_excl_da_declined"
+    },
+    {
+      "id": "outside_nyc",
+      "label": "AO cases kept in criminal court in the 55 counties outside NYC, Westchester and Nassau, 2023-2025",
+      "value": 22.6,
+      "unit": "%",
+      "compare": {
+        "label": "Westchester",
+        "value": 13.9,
+        "unit": "%"
+      },
+      "source": "CUR-0010, pct_criminal_court_excl_da_declined"
+    },
+    {
+      "id": "sentences",
+      "label": "Black youth outside NYC sentenced to confinement of a year or more, 2023-2025",
+      "value": 57.8,
+      "unit": "%",
+      "compare": {
+        "label": "white youth",
+        "value": 36.2,
+        "unit": "%"
+      },
+      "source": "CUR-0010, pct_confinement_1yr_plus (not adjusted for charge or prior record)"
+    }
+  ],
+  "map": {
+    "highlight_county": "36119",
+    "default_measure": "criminal_court_share",
+    "measures": {
+      "criminal_court_share": {
+        "label": "Share of AO cases kept in criminal court, 2023-2025",
+        "unit": "%",
+        "description": "Of cases the DA didn't decline, the share that stayed in criminal court rather than moving to Family Court or probation.",
+        "source": "CUR-0010, pct_criminal_court_excl_da_declined",
+        "state": {
+          "name": "New York State",
+          "value": 15.4,
+          "numerator": 2017,
+          "denominator": 13102
+        },
+        "counties": {
+          "36001": {
+            "name": "Albany",
+            "value": 20.1,
+            "numerator": 37,
+            "denominator": 184,
+            "too_few": false
+          },
+          "36003": {
+            "name": "Allegany",
+            "value": 29.4,
+            "numerator": 5,
+            "denominator": 17,
+            "too_few": true
+          },
+          "36005": {
+            "name": "Bronx",
+            "value": 16,
+            "numerator": 282,
+            "denominator": 1768,
+            "too_few": false
+          },
+          "36007": {
+            "name": "Broome",
+            "value": 39.1,
+            "numerator": 52,
+            "denominator": 133,
+            "too_few": false
+          },
+          "36009": {
+            "name": "Cattaraugus",
+            "value": 20.6,
+            "numerator": 7,
+            "denominator": 34,
+            "too_few": false
+          },
+          "36011": {
+            "name": "Cayuga",
+            "value": 28.6,
+            "numerator": 8,
+            "denominator": 28,
+            "too_few": true
+          },
+          "36013": {
+            "name": "Chautauqua",
+            "value": 2.6,
+            "numerator": 1,
+            "denominator": 38,
+            "too_few": false
+          },
+          "36015": {
+            "name": "Chemung",
+            "value": 27.9,
+            "numerator": 12,
+            "denominator": 43,
+            "too_few": false
+          },
+          "36017": {
+            "name": "Chenango",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 12,
+            "too_few": true
+          },
+          "36019": {
+            "name": "Clinton",
+            "value": 3.8,
+            "numerator": 1,
+            "denominator": 26,
+            "too_few": true
+          },
+          "36021": {
+            "name": "Columbia",
+            "value": 10,
+            "numerator": 2,
+            "denominator": 20,
+            "too_few": true
+          },
+          "36023": {
+            "name": "Cortland",
+            "value": 7.7,
+            "numerator": 2,
+            "denominator": 26,
+            "too_few": true
+          },
+          "36025": {
+            "name": "Delaware",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 4,
+            "too_few": true
+          },
+          "36027": {
+            "name": "Dutchess",
+            "value": 15.6,
+            "numerator": 12,
+            "denominator": 77,
+            "too_few": false
+          },
+          "36029": {
+            "name": "Erie",
+            "value": 35.3,
+            "numerator": 258,
+            "denominator": 730,
+            "too_few": false
+          },
+          "36031": {
+            "name": "Essex",
+            "value": 5,
+            "numerator": 1,
+            "denominator": 20,
+            "too_few": true
+          },
+          "36033": {
+            "name": "Franklin",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 19,
+            "too_few": true
+          },
+          "36035": {
+            "name": "Fulton",
+            "value": 38,
+            "numerator": 19,
+            "denominator": 50,
+            "too_few": false
+          },
+          "36037": {
+            "name": "Genesee",
+            "value": 33.3,
+            "numerator": 6,
+            "denominator": 18,
+            "too_few": true
+          },
+          "36039": {
+            "name": "Greene",
+            "value": 10,
+            "numerator": 1,
+            "denominator": 10,
+            "too_few": true
+          },
+          "36041": {
+            "name": "Hamilton",
+            "value": null,
+            "numerator": 0,
+            "denominator": 0,
+            "too_few": true
+          },
+          "36043": {
+            "name": "Herkimer",
+            "value": 14.3,
+            "numerator": 5,
+            "denominator": 35,
+            "too_few": false
+          },
+          "36045": {
+            "name": "Jefferson",
+            "value": 4.9,
+            "numerator": 2,
+            "denominator": 41,
+            "too_few": false
+          },
+          "36047": {
+            "name": "Kings",
+            "value": 10.7,
+            "numerator": 261,
+            "denominator": 2450,
+            "too_few": false
+          },
+          "36049": {
+            "name": "Lewis",
+            "value": 14.3,
+            "numerator": 1,
+            "denominator": 7,
+            "too_few": true
+          },
+          "36051": {
+            "name": "Livingston",
+            "value": 18.2,
+            "numerator": 2,
+            "denominator": 11,
+            "too_few": true
+          },
+          "36053": {
+            "name": "Madison",
+            "value": 33.3,
+            "numerator": 11,
+            "denominator": 33,
+            "too_few": false
+          },
+          "36055": {
+            "name": "Monroe",
+            "value": 20.6,
+            "numerator": 118,
+            "denominator": 573,
+            "too_few": false
+          },
+          "36057": {
+            "name": "Montgomery",
+            "value": 39.3,
+            "numerator": 11,
+            "denominator": 28,
+            "too_few": true
+          },
+          "36059": {
+            "name": "Nassau",
+            "value": 9.8,
+            "numerator": 42,
+            "denominator": 430,
+            "too_few": false
+          },
+          "36061": {
+            "name": "New York",
+            "value": 11.8,
+            "numerator": 197,
+            "denominator": 1663,
+            "too_few": false
+          },
+          "36063": {
+            "name": "Niagara",
+            "value": 5.1,
+            "numerator": 7,
+            "denominator": 138,
+            "too_few": false
+          },
+          "36065": {
+            "name": "Oneida",
+            "value": 22.6,
+            "numerator": 36,
+            "denominator": 159,
+            "too_few": false
+          },
+          "36067": {
+            "name": "Onondaga",
+            "value": 23.4,
+            "numerator": 121,
+            "denominator": 516,
+            "too_few": false
+          },
+          "36069": {
+            "name": "Ontario",
+            "value": 62.5,
+            "numerator": 10,
+            "denominator": 16,
+            "too_few": true
+          },
+          "36071": {
+            "name": "Orange",
+            "value": 18,
+            "numerator": 31,
+            "denominator": 172,
+            "too_few": false
+          },
+          "36073": {
+            "name": "Orleans",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 10,
+            "too_few": true
+          },
+          "36075": {
+            "name": "Oswego",
+            "value": 21.2,
+            "numerator": 7,
+            "denominator": 33,
+            "too_few": false
+          },
+          "36077": {
+            "name": "Otsego",
+            "value": 6.3,
+            "numerator": 1,
+            "denominator": 16,
+            "too_few": true
+          },
+          "36079": {
+            "name": "Putnam",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 12,
+            "too_few": true
+          },
+          "36081": {
+            "name": "Queens",
+            "value": 9.6,
+            "numerator": 164,
+            "denominator": 1708,
+            "too_few": false
+          },
+          "36083": {
+            "name": "Rensselaer",
+            "value": 26.4,
+            "numerator": 28,
+            "denominator": 106,
+            "too_few": false
+          },
+          "36085": {
+            "name": "Richmond",
+            "value": 10.3,
+            "numerator": 36,
+            "denominator": 351,
+            "too_few": false
+          },
+          "36087": {
+            "name": "Rockland",
+            "value": 7.9,
+            "numerator": 11,
+            "denominator": 140,
+            "too_few": false
+          },
+          "36091": {
+            "name": "Saratoga",
+            "value": 7.1,
+            "numerator": 5,
+            "denominator": 70,
+            "too_few": false
+          },
+          "36093": {
+            "name": "Schenectady",
+            "value": 24.3,
+            "numerator": 17,
+            "denominator": 70,
+            "too_few": false
+          },
+          "36095": {
+            "name": "Schoharie",
+            "value": 40,
+            "numerator": 2,
+            "denominator": 5,
+            "too_few": true
+          },
+          "36097": {
+            "name": "Schuyler",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 1,
+            "too_few": true
+          },
+          "36099": {
+            "name": "Seneca",
+            "value": 8.3,
+            "numerator": 1,
+            "denominator": 12,
+            "too_few": true
+          },
+          "36089": {
+            "name": "St. Lawrence",
+            "value": 18.4,
+            "numerator": 7,
+            "denominator": 38,
+            "too_few": false
+          },
+          "36101": {
+            "name": "Steuben",
+            "value": 40,
+            "numerator": 8,
+            "denominator": 20,
+            "too_few": true
+          },
+          "36103": {
+            "name": "Suffolk",
+            "value": 21,
+            "numerator": 74,
+            "denominator": 352,
+            "too_few": false
+          },
+          "36105": {
+            "name": "Sullivan",
+            "value": 8,
+            "numerator": 2,
+            "denominator": 25,
+            "too_few": true
+          },
+          "36107": {
+            "name": "Tioga",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 2,
+            "too_few": true
+          },
+          "36109": {
+            "name": "Tompkins",
+            "value": 8,
+            "numerator": 2,
+            "denominator": 25,
+            "too_few": true
+          },
+          "36111": {
+            "name": "Ulster",
+            "value": 14.5,
+            "numerator": 8,
+            "denominator": 55,
+            "too_few": false
+          },
+          "36113": {
+            "name": "Warren",
+            "value": 11.4,
+            "numerator": 4,
+            "denominator": 35,
+            "too_few": false
+          },
+          "36115": {
+            "name": "Washington",
+            "value": 25,
+            "numerator": 11,
+            "denominator": 44,
+            "too_few": false
+          },
+          "36117": {
+            "name": "Wayne",
+            "value": 37,
+            "numerator": 10,
+            "denominator": 27,
+            "too_few": true
+          },
+          "36119": {
+            "name": "Westchester",
+            "value": 13.9,
+            "numerator": 57,
+            "denominator": 409,
+            "too_few": false
+          },
+          "36121": {
+            "name": "Wyoming",
+            "value": 20,
+            "numerator": 1,
+            "denominator": 5,
+            "too_few": true
+          },
+          "36123": {
+            "name": "Yates",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 2,
+            "too_few": true
+          }
+        }
+      },
+      "arrests_change_since_2019": {
+        "label": "Change in felony arrests of people under 18, 2019 to 2025",
+        "unit": "change",
+        "description": "How many more or fewer felony arrests of people under 18 there were in 2025 than in 2019.",
+        "source": "CUR-0011, change_since_2019_pct",
+        "state": {
+          "name": "New York State",
+          "value": 10.1,
+          "numerator": 6395,
+          "denominator": 5810
+        },
+        "counties": {
+          "36001": {
+            "name": "Albany",
+            "value": 22.1,
+            "numerator": 116,
+            "denominator": 95,
+            "too_few": false
+          },
+          "36003": {
+            "name": "Allegany",
+            "value": -81.8,
+            "numerator": 4,
+            "denominator": 22,
+            "too_few": true
+          },
+          "36005": {
+            "name": "Bronx",
+            "value": 28.5,
+            "numerator": 1092,
+            "denominator": 850,
+            "too_few": false
+          },
+          "36007": {
+            "name": "Broome",
+            "value": 14.6,
+            "numerator": 55,
+            "denominator": 48,
+            "too_few": false
+          },
+          "36009": {
+            "name": "Cattaraugus",
+            "value": -27.3,
+            "numerator": 8,
+            "denominator": 11,
+            "too_few": true
+          },
+          "36011": {
+            "name": "Cayuga",
+            "value": -70.6,
+            "numerator": 5,
+            "denominator": 17,
+            "too_few": true
+          },
+          "36013": {
+            "name": "Chautauqua",
+            "value": -32.4,
+            "numerator": 25,
+            "denominator": 37,
+            "too_few": true
+          },
+          "36015": {
+            "name": "Chemung",
+            "value": 5.9,
+            "numerator": 18,
+            "denominator": 17,
+            "too_few": true
+          },
+          "36017": {
+            "name": "Chenango",
+            "value": -66.7,
+            "numerator": 1,
+            "denominator": 3,
+            "too_few": true
+          },
+          "36019": {
+            "name": "Clinton",
+            "value": -46.7,
+            "numerator": 8,
+            "denominator": 15,
+            "too_few": true
+          },
+          "36021": {
+            "name": "Columbia",
+            "value": -18.2,
+            "numerator": 18,
+            "denominator": 22,
+            "too_few": true
+          },
+          "36023": {
+            "name": "Cortland",
+            "value": -53.3,
+            "numerator": 7,
+            "denominator": 15,
+            "too_few": true
+          },
+          "36025": {
+            "name": "Delaware",
+            "value": -50,
+            "numerator": 4,
+            "denominator": 8,
+            "too_few": true
+          },
+          "36027": {
+            "name": "Dutchess",
+            "value": -33.3,
+            "numerator": 24,
+            "denominator": 36,
+            "too_few": true
+          },
+          "36029": {
+            "name": "Erie",
+            "value": 13.3,
+            "numerator": 324,
+            "denominator": 286,
+            "too_few": false
+          },
+          "36031": {
+            "name": "Essex",
+            "value": 100,
+            "numerator": 8,
+            "denominator": 4,
+            "too_few": true
+          },
+          "36033": {
+            "name": "Franklin",
+            "value": -42.9,
+            "numerator": 4,
+            "denominator": 7,
+            "too_few": true
+          },
+          "36035": {
+            "name": "Fulton",
+            "value": 78.6,
+            "numerator": 25,
+            "denominator": 14,
+            "too_few": true
+          },
+          "36037": {
+            "name": "Genesee",
+            "value": -70,
+            "numerator": 3,
+            "denominator": 10,
+            "too_few": true
+          },
+          "36039": {
+            "name": "Greene",
+            "value": -40,
+            "numerator": 3,
+            "denominator": 5,
+            "too_few": true
+          },
+          "36041": {
+            "name": "Hamilton",
+            "value": -100,
+            "numerator": 0,
+            "denominator": 1,
+            "too_few": true
+          },
+          "36043": {
+            "name": "Herkimer",
+            "value": 18.2,
+            "numerator": 13,
+            "denominator": 11,
+            "too_few": true
+          },
+          "36045": {
+            "name": "Jefferson",
+            "value": -4.2,
+            "numerator": 23,
+            "denominator": 24,
+            "too_few": true
+          },
+          "36047": {
+            "name": "Kings",
+            "value": 6.5,
+            "numerator": 1302,
+            "denominator": 1223,
+            "too_few": false
+          },
+          "36049": {
+            "name": "Lewis",
+            "value": 100,
+            "numerator": 2,
+            "denominator": 1,
+            "too_few": true
+          },
+          "36051": {
+            "name": "Livingston",
+            "value": -76.9,
+            "numerator": 3,
+            "denominator": 13,
+            "too_few": true
+          },
+          "36053": {
+            "name": "Madison",
+            "value": 7.7,
+            "numerator": 14,
+            "denominator": 13,
+            "too_few": true
+          },
+          "36055": {
+            "name": "Monroe",
+            "value": 16.6,
+            "numerator": 204,
+            "denominator": 175,
+            "too_few": false
+          },
+          "36057": {
+            "name": "Montgomery",
+            "value": 33.3,
+            "numerator": 16,
+            "denominator": 12,
+            "too_few": true
+          },
+          "36059": {
+            "name": "Nassau",
+            "value": -10.1,
+            "numerator": 160,
+            "denominator": 178,
+            "too_few": false
+          },
+          "36061": {
+            "name": "New York",
+            "value": 5.3,
+            "numerator": 887,
+            "denominator": 842,
+            "too_few": false
+          },
+          "36063": {
+            "name": "Niagara",
+            "value": 63.4,
+            "numerator": 67,
+            "denominator": 41,
+            "too_few": false
+          },
+          "36065": {
+            "name": "Oneida",
+            "value": 35.3,
+            "numerator": 69,
+            "denominator": 51,
+            "too_few": false
+          },
+          "36067": {
+            "name": "Onondaga",
+            "value": -20.1,
+            "numerator": 183,
+            "denominator": 229,
+            "too_few": false
+          },
+          "36069": {
+            "name": "Ontario",
+            "value": -36.4,
+            "numerator": 7,
+            "denominator": 11,
+            "too_few": true
+          },
+          "36071": {
+            "name": "Orange",
+            "value": 62.1,
+            "numerator": 94,
+            "denominator": 58,
+            "too_few": false
+          },
+          "36073": {
+            "name": "Orleans",
+            "value": -50,
+            "numerator": 5,
+            "denominator": 10,
+            "too_few": true
+          },
+          "36075": {
+            "name": "Oswego",
+            "value": 77.8,
+            "numerator": 16,
+            "denominator": 9,
+            "too_few": true
+          },
+          "36077": {
+            "name": "Otsego",
+            "value": -64.7,
+            "numerator": 6,
+            "denominator": 17,
+            "too_few": true
+          },
+          "36079": {
+            "name": "Putnam",
+            "value": 100,
+            "numerator": 6,
+            "denominator": 3,
+            "too_few": true
+          },
+          "36081": {
+            "name": "Queens",
+            "value": 24.1,
+            "numerator": 823,
+            "denominator": 663,
+            "too_few": false
+          },
+          "36083": {
+            "name": "Rensselaer",
+            "value": 11.4,
+            "numerator": 49,
+            "denominator": 44,
+            "too_few": false
+          },
+          "36085": {
+            "name": "Richmond",
+            "value": 14.1,
+            "numerator": 170,
+            "denominator": 149,
+            "too_few": false
+          },
+          "36087": {
+            "name": "Rockland",
+            "value": -23.7,
+            "numerator": 29,
+            "denominator": 38,
+            "too_few": true
+          },
+          "36091": {
+            "name": "Saratoga",
+            "value": 50,
+            "numerator": 21,
+            "denominator": 14,
+            "too_few": true
+          },
+          "36093": {
+            "name": "Schenectady",
+            "value": -14.7,
+            "numerator": 29,
+            "denominator": 34,
+            "too_few": true
+          },
+          "36095": {
+            "name": "Schoharie",
+            "value": -66.7,
+            "numerator": 1,
+            "denominator": 3,
+            "too_few": true
+          },
+          "36097": {
+            "name": "Schuyler",
+            "value": null,
+            "numerator": 0,
+            "denominator": 0,
+            "too_few": true
+          },
+          "36099": {
+            "name": "Seneca",
+            "value": 100,
+            "numerator": 4,
+            "denominator": 2,
+            "too_few": true
+          },
+          "36089": {
+            "name": "St. Lawrence",
+            "value": -30.8,
+            "numerator": 9,
+            "denominator": 13,
+            "too_few": true
+          },
+          "36101": {
+            "name": "Steuben",
+            "value": -63.6,
+            "numerator": 4,
+            "denominator": 11,
+            "too_few": true
+          },
+          "36103": {
+            "name": "Suffolk",
+            "value": 5.8,
+            "numerator": 165,
+            "denominator": 156,
+            "too_few": false
+          },
+          "36105": {
+            "name": "Sullivan",
+            "value": -22.2,
+            "numerator": 7,
+            "denominator": 9,
+            "too_few": true
+          },
+          "36107": {
+            "name": "Tioga",
+            "value": 0,
+            "numerator": 3,
+            "denominator": 3,
+            "too_few": true
+          },
+          "36109": {
+            "name": "Tompkins",
+            "value": -31.3,
+            "numerator": 11,
+            "denominator": 16,
+            "too_few": true
+          },
+          "36111": {
+            "name": "Ulster",
+            "value": 11.8,
+            "numerator": 19,
+            "denominator": 17,
+            "too_few": true
+          },
+          "36113": {
+            "name": "Warren",
+            "value": 166.7,
+            "numerator": 16,
+            "denominator": 6,
+            "too_few": true
+          },
+          "36115": {
+            "name": "Washington",
+            "value": 0,
+            "numerator": 11,
+            "denominator": 11,
+            "too_few": true
+          },
+          "36117": {
+            "name": "Wayne",
+            "value": 77.8,
+            "numerator": 16,
+            "denominator": 9,
+            "too_few": true
+          },
+          "36119": {
+            "name": "Westchester",
+            "value": 4.9,
+            "numerator": 172,
+            "denominator": 164,
+            "too_few": false
+          },
+          "36121": {
+            "name": "Wyoming",
+            "value": 150,
+            "numerator": 5,
+            "denominator": 2,
+            "too_few": true
+          },
+          "36123": {
+            "name": "Yates",
+            "value": 0,
+            "numerator": 2,
+            "denominator": 2,
+            "too_few": true
+          }
+        }
+      },
+      "black_share_of_arrests": {
+        "label": "Black youth's share of felony arrests of people under 18, 2023-2025",
+        "unit": "%",
+        "description": "The share of all under-18 felony arrests that were of Black youth. A share of arrests, not an arrest rate.",
+        "source": "CUR-0011, pct_black",
+        "state": {
+          "name": "New York State",
+          "value": 56.4,
+          "numerator": 10049,
+          "denominator": 17821
+        },
+        "counties": {
+          "36001": {
+            "name": "Albany",
+            "value": 68,
+            "numerator": 206,
+            "denominator": 303,
+            "too_few": false
+          },
+          "36003": {
+            "name": "Allegany",
+            "value": 7.7,
+            "numerator": 1,
+            "denominator": 13,
+            "too_few": true
+          },
+          "36005": {
+            "name": "Bronx",
+            "value": 49.6,
+            "numerator": 1459,
+            "denominator": 2940,
+            "too_few": false
+          },
+          "36007": {
+            "name": "Broome",
+            "value": 34.2,
+            "numerator": 54,
+            "denominator": 158,
+            "too_few": false
+          },
+          "36009": {
+            "name": "Cattaraugus",
+            "value": 21.9,
+            "numerator": 7,
+            "denominator": 32,
+            "too_few": false
+          },
+          "36011": {
+            "name": "Cayuga",
+            "value": 36,
+            "numerator": 9,
+            "denominator": 25,
+            "too_few": true
+          },
+          "36013": {
+            "name": "Chautauqua",
+            "value": 11.3,
+            "numerator": 6,
+            "denominator": 53,
+            "too_few": false
+          },
+          "36015": {
+            "name": "Chemung",
+            "value": 41,
+            "numerator": 25,
+            "denominator": 61,
+            "too_few": false
+          },
+          "36017": {
+            "name": "Chenango",
+            "value": 23.1,
+            "numerator": 3,
+            "denominator": 13,
+            "too_few": true
+          },
+          "36019": {
+            "name": "Clinton",
+            "value": 9.4,
+            "numerator": 3,
+            "denominator": 32,
+            "too_few": false
+          },
+          "36021": {
+            "name": "Columbia",
+            "value": 65.4,
+            "numerator": 17,
+            "denominator": 26,
+            "too_few": true
+          },
+          "36023": {
+            "name": "Cortland",
+            "value": 10.3,
+            "numerator": 3,
+            "denominator": 29,
+            "too_few": true
+          },
+          "36025": {
+            "name": "Delaware",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 7,
+            "too_few": true
+          },
+          "36027": {
+            "name": "Dutchess",
+            "value": 36.6,
+            "numerator": 30,
+            "denominator": 82,
+            "too_few": false
+          },
+          "36029": {
+            "name": "Erie",
+            "value": 76.5,
+            "numerator": 639,
+            "denominator": 835,
+            "too_few": false
+          },
+          "36031": {
+            "name": "Essex",
+            "value": 5.3,
+            "numerator": 1,
+            "denominator": 19,
+            "too_few": true
+          },
+          "36033": {
+            "name": "Franklin",
+            "value": 10,
+            "numerator": 2,
+            "denominator": 20,
+            "too_few": true
+          },
+          "36035": {
+            "name": "Fulton",
+            "value": 7.7,
+            "numerator": 5,
+            "denominator": 65,
+            "too_few": false
+          },
+          "36037": {
+            "name": "Genesee",
+            "value": 40,
+            "numerator": 8,
+            "denominator": 20,
+            "too_few": true
+          },
+          "36039": {
+            "name": "Greene",
+            "value": 15.4,
+            "numerator": 2,
+            "denominator": 13,
+            "too_few": true
+          },
+          "36041": {
+            "name": "Hamilton",
+            "value": null,
+            "numerator": 0,
+            "denominator": 0,
+            "too_few": true
+          },
+          "36043": {
+            "name": "Herkimer",
+            "value": 23.1,
+            "numerator": 9,
+            "denominator": 39,
+            "too_few": false
+          },
+          "36045": {
+            "name": "Jefferson",
+            "value": 38.3,
+            "numerator": 18,
+            "denominator": 47,
+            "too_few": false
+          },
+          "36047": {
+            "name": "Kings",
+            "value": 73.2,
+            "numerator": 2609,
+            "denominator": 3563,
+            "too_few": false
+          },
+          "36049": {
+            "name": "Lewis",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 8,
+            "too_few": true
+          },
+          "36051": {
+            "name": "Livingston",
+            "value": 28.6,
+            "numerator": 4,
+            "denominator": 14,
+            "too_few": true
+          },
+          "36053": {
+            "name": "Madison",
+            "value": 16.3,
+            "numerator": 8,
+            "denominator": 49,
+            "too_few": false
+          },
+          "36055": {
+            "name": "Monroe",
+            "value": 68,
+            "numerator": 447,
+            "denominator": 657,
+            "too_few": false
+          },
+          "36057": {
+            "name": "Montgomery",
+            "value": 32.4,
+            "numerator": 11,
+            "denominator": 34,
+            "too_few": false
+          },
+          "36059": {
+            "name": "Nassau",
+            "value": 48.4,
+            "numerator": 246,
+            "denominator": 508,
+            "too_few": false
+          },
+          "36061": {
+            "name": "New York",
+            "value": 60,
+            "numerator": 1437,
+            "denominator": 2395,
+            "too_few": false
+          },
+          "36063": {
+            "name": "Niagara",
+            "value": 46.3,
+            "numerator": 82,
+            "denominator": 177,
+            "too_few": false
+          },
+          "36065": {
+            "name": "Oneida",
+            "value": 43.6,
+            "numerator": 79,
+            "denominator": 181,
+            "too_few": false
+          },
+          "36067": {
+            "name": "Onondaga",
+            "value": 73.1,
+            "numerator": 446,
+            "denominator": 610,
+            "too_few": false
+          },
+          "36069": {
+            "name": "Ontario",
+            "value": 27.8,
+            "numerator": 5,
+            "denominator": 18,
+            "too_few": true
+          },
+          "36071": {
+            "name": "Orange",
+            "value": 43.8,
+            "numerator": 102,
+            "denominator": 233,
+            "too_few": false
+          },
+          "36073": {
+            "name": "Orleans",
+            "value": 42.9,
+            "numerator": 6,
+            "denominator": 14,
+            "too_few": true
+          },
+          "36075": {
+            "name": "Oswego",
+            "value": 2.6,
+            "numerator": 1,
+            "denominator": 39,
+            "too_few": false
+          },
+          "36077": {
+            "name": "Otsego",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 22,
+            "too_few": true
+          },
+          "36079": {
+            "name": "Putnam",
+            "value": 5.6,
+            "numerator": 1,
+            "denominator": 18,
+            "too_few": true
+          },
+          "36081": {
+            "name": "Queens",
+            "value": 47.8,
+            "numerator": 1107,
+            "denominator": 2317,
+            "too_few": false
+          },
+          "36083": {
+            "name": "Rensselaer",
+            "value": 51.7,
+            "numerator": 60,
+            "denominator": 116,
+            "too_few": false
+          },
+          "36085": {
+            "name": "Richmond",
+            "value": 62.1,
+            "numerator": 300,
+            "denominator": 483,
+            "too_few": false
+          },
+          "36087": {
+            "name": "Rockland",
+            "value": 25.5,
+            "numerator": 38,
+            "denominator": 149,
+            "too_few": false
+          },
+          "36091": {
+            "name": "Saratoga",
+            "value": 13.1,
+            "numerator": 11,
+            "denominator": 84,
+            "too_few": false
+          },
+          "36093": {
+            "name": "Schenectady",
+            "value": 46.8,
+            "numerator": 37,
+            "denominator": 79,
+            "too_few": false
+          },
+          "36095": {
+            "name": "Schoharie",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 4,
+            "too_few": true
+          },
+          "36097": {
+            "name": "Schuyler",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 2,
+            "too_few": true
+          },
+          "36099": {
+            "name": "Seneca",
+            "value": 35.3,
+            "numerator": 6,
+            "denominator": 17,
+            "too_few": true
+          },
+          "36089": {
+            "name": "St. Lawrence",
+            "value": 5.4,
+            "numerator": 2,
+            "denominator": 37,
+            "too_few": false
+          },
+          "36101": {
+            "name": "Steuben",
+            "value": 25,
+            "numerator": 5,
+            "denominator": 20,
+            "too_few": true
+          },
+          "36103": {
+            "name": "Suffolk",
+            "value": 45.5,
+            "numerator": 190,
+            "denominator": 418,
+            "too_few": false
+          },
+          "36105": {
+            "name": "Sullivan",
+            "value": 20.8,
+            "numerator": 5,
+            "denominator": 24,
+            "too_few": true
+          },
+          "36107": {
+            "name": "Tioga",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 4,
+            "too_few": true
+          },
+          "36109": {
+            "name": "Tompkins",
+            "value": 55.2,
+            "numerator": 16,
+            "denominator": 29,
+            "too_few": true
+          },
+          "36111": {
+            "name": "Ulster",
+            "value": 34.4,
+            "numerator": 22,
+            "denominator": 64,
+            "too_few": false
+          },
+          "36113": {
+            "name": "Warren",
+            "value": 8.1,
+            "numerator": 3,
+            "denominator": 37,
+            "too_few": false
+          },
+          "36115": {
+            "name": "Washington",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 51,
+            "too_few": false
+          },
+          "36117": {
+            "name": "Wayne",
+            "value": 22.2,
+            "numerator": 6,
+            "denominator": 27,
+            "too_few": true
+          },
+          "36119": {
+            "name": "Westchester",
+            "value": 52.2,
+            "numerator": 248,
+            "denominator": 475,
+            "too_few": false
+          },
+          "36121": {
+            "name": "Wyoming",
+            "value": 22.2,
+            "numerator": 2,
+            "denominator": 9,
+            "too_few": true
+          },
+          "36123": {
+            "name": "Yates",
+            "value": 0,
+            "numerator": 0,
+            "denominator": 3,
+            "too_few": true
+          }
+        }
+      }
+    }
+  },
+  "charts": {
+    "arrests_trend": {
+      "title": "Felony arrests of people under 18, 2019 to 2025",
+      "unit": "count",
+      "source": "CUR-0011, felony_arrests",
+      "years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "series": {
+        "New York State": [
+          5810,
+          4147,
+          3621,
+          4540,
+          5454,
+          5972,
+          6395
+        ],
+        "Westchester": [
+          164,
+          117,
+          106,
+          164,
+          155,
+          148,
+          172
+        ]
+      },
+      "notes": {
+        "2021": "COVID-19 low"
+      }
+    },
+    "criminal_court_by_year": {
+      "title": "Share of AO cases kept in criminal court, statewide, 2021 to 2025",
+      "unit": "%",
+      "source": "CUR-0010, pct_criminal_court_excl_da_declined and pct_removed_excl_da_declined",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "criminal_court": [
+        16.3,
+        14.5,
+        15.3,
+        14.6,
+        16.2
+      ],
+      "family_court": [
+        83.7,
+        85.5,
+        84.7,
+        85.4,
+        83.8
+      ],
+      "cases": [
+        2644,
+        3474,
+        4182,
+        4353,
+        4567
+      ]
+    },
+    "by_place": {
+      "title": "Share of AO cases kept in criminal court, by place, 2023-2025",
+      "unit": "%",
+      "source": "CUR-0010, pct_criminal_court_excl_da_declined",
+      "places": [
+        "55 counties outside NYC, Westchester and Nassau",
+        "New York City",
+        "Westchester",
+        "Nassau"
+      ],
+      "values": [
+        22.6,
+        11.8,
+        13.9,
+        9.8
+      ],
+      "cases": [
+        4323,
+        7940,
+        409,
+        430
+      ],
+      "too_few": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "sentences_by_race": {
+      "title": "AO sentences outside New York City, by race, 2023-2025",
+      "unit": "%",
+      "source": "CUR-0010, pct_confinement_1yr_plus and the other pct_ sentence columns",
+      "caveat": "Not adjusted for charge or prior record. DCJS's category is '1 year or more'.",
+      "groups": [
+        "Black",
+        "White"
+      ],
+      "confinement_1yr_plus": [
+        57.8,
+        36.2
+      ],
+      "sentences": [
+        441,
+        130
+      ],
+      "too_few": [
+        false,
+        false
+      ],
+      "mix": {
+        "types": [
+          "Confinement, 1 year or more",
+          "Confinement, under 1 year",
+          "Confinement under 1 year, plus probation",
+          "Probation",
+          "Conditional discharge",
+          "Other"
+        ],
+        "shares": {
+          "Black": [
+            57.8,
+            7.9,
+            12,
+            20.9,
+            0.9,
+            0.5
+          ],
+          "White": [
+            36.2,
+            4.6,
+            13.8,
+            40,
+            3.8,
+            1.5
+          ]
+        }
+      }
+    },
+    "arrests_by_race": {
+      "title": "Felony arrests of people under 18, by race and ethnicity, 2023-2025",
+      "unit": "%",
+      "source": "CUR-0011, pct_black, pct_hispanic, pct_white, pct_asian, pct_other_unknown",
+      "caveat": "Each group's share of arrests, not an arrest rate.",
+      "groups": [
+        "Black",
+        "Hispanic",
+        "White",
+        "Asian",
+        "Other or unknown"
+      ],
+      "places": {
+        "Westchester": {
+          "shares": [
+            52.2,
+            36.4,
+            9.5,
+            0,
+            1.9
+          ],
+          "arrests": 475,
+          "too_few": false
+        },
+        "Rest of state excluding Westchester": {
+          "shares": [
+            51.2,
+            16.2,
+            28.3,
+            1.1,
+            3.2
+          ],
+          "arrests": 5648,
+          "too_few": false
+        },
+        "New York City": {
+          "shares": [
+            59.1,
+            34.3,
+            2.8,
+            3.2,
+            0.7
+          ],
+          "arrests": 11698,
+          "too_few": false
+        },
+        "New York State": {
+          "shares": [
+            56.4,
+            28.6,
+            11,
+            2.4,
+            1.5
+          ],
+          "arrests": 17821,
+          "too_few": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Youth Justice in New York · Westchester Children's Association</title>
+<meta name="description" content="Felony arrests of people under 18 and what happens to 16- and 17-year-olds charged with a felony in New York, from DCJS data. A Westchester Children's Association dashboard.">
+
+<!-- Styles: everything is in styles.css (WCA colors and font included). -->
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<!--
+  HOW THIS PAGE IS BUILT
+  ======================
+  Every number on this page comes from data/data.json; nothing is typed in by hand.
+    * The headline tiles and the charts are drawn by charts.js.
+    * Numbers inside sentences use <span data-fill="..."> and are filled in by charts.js,
+      so the words can never disagree with the data. The path inside data-fill points
+      into data.json, e.g. "charts.by_place.values.0".
+  The words themselves (titles, commentary, captions) live here and are edited here.
+  Text marked [PLACEHOLDER] is a first draft for Brandon to rewrite.
+
+  PAGE SECTIONS, top to bottom
+    1. Header
+    2. Headline numbers (four tiles)
+    3. Map of New York's 62 counties
+    4. The story: five charts, each with commentary
+    5. About the data
+    6. Footer
+-->
+
+<div class="page">
+
+  <!-- ===================================================================
+       1. HEADER
+       =================================================================== -->
+  <header class="page-header">
+    <div class="kicker">Westchester Children's Association · Data dashboard</div>
+    <h1>Youth justice in New York</h1>
+    <p class="subtitle">
+      [PLACEHOLDER] Felony arrests of people under 18, and what happens to 16- and 17-year-olds
+      charged with a felony, in Westchester and across New York State. Built from
+      Division of Criminal Justice Services (DCJS) data through <span data-fill="meta.latest_year" data-format="raw"></span>.
+    </p>
+    <hr class="rule-gradient">
+  </header>
+
+
+  <!-- ===================================================================
+       2. HEADLINE NUMBERS
+       charts.js fills this row from data.json "headlines". One tile per entry.
+       =================================================================== -->
+  <section id="headlines" aria-label="Headline numbers">
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+
+  <!-- ===================================================================
+       3. MAP
+       The dropdown switches between the three measures in data.json "map".
+       Hover a county for its numbers; click it to compare with the state.
+       =================================================================== -->
+  <section id="map-section">
+    <h2>County by county</h2>
+    <p class="section-intro">
+      [PLACEHOLDER] Where a young person is arrested shapes what happens next. Pick a measure, then
+      hover or click a county. Counties with too few cases to give a reliable share are hatched.
+    </p>
+
+    <div class="controls">
+      <label for="map-measure">Show</label>
+      <select id="map-measure"></select>
+    </div>
+
+    <div class="map-layout">
+      <div class="map-column">
+        <svg id="map" class="map" viewBox="0 0 720 560" role="img" aria-labelledby="map-title">
+          <title id="map-title">Map of New York counties</title>
+          <defs>
+            <!-- Hatching for "too few cases": thin gray diagonal lines, no fill color -->
+            <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+              <rect width="6" height="6" fill="#F4F4F4"></rect>
+              <line x1="0" y1="0" x2="0" y2="6" stroke="#B5B5B5" stroke-width="1.2"></line>
+            </pattern>
+          </defs>
+          <g id="map-counties"></g>
+        </svg>
+        <div class="legend map-legend" id="map-legend"></div>
+      </div>
+
+      <aside class="side-panel" id="side-panel" aria-live="polite">
+        <!-- Filled by charts.js: the clicked county next to the state -->
+      </aside>
+    </div>
+    <p class="source" id="map-source"></p>
+  </section>
+
+
+  <!-- ===================================================================
+       4. THE STORY  ·  five charts
+       Each card: kicker, heading (the finding), commentary, chart, source.
+       =================================================================== -->
+  <section id="story">
+
+    <!-- Chart 1: arrests by year, statewide and Westchester, as two small panels
+         (they can't share one axis: 6,000 vs 170). -->
+    <article class="card" id="card-arrests">
+      <div class="kicker">1 · Arrests</div>
+      <h2>Felony arrests of people under 18 are up <span data-fill="headlines.0.compare.value" data-format="change0"></span> since 2019</h2>
+      <p class="commentary">
+        [PLACEHOLDER] Statewide, <span data-fill="headlines.0.value"></span> people under 18 were arrested
+        for a felony in <span data-fill="meta.latest_year" data-format="raw"></span>, compared with
+        <span data-fill="map.measures.arrests_change_since_2019.state.denominator"></span> in 2019. Arrests fell
+        sharply in the COVID-19 years and have climbed since. Westchester's count moved less:
+        <span data-fill="map.measures.arrests_change_since_2019.counties.36119.numerator"></span> in
+        <span data-fill="meta.latest_year" data-format="raw"></span> against
+        <span data-fill="map.measures.arrests_change_since_2019.counties.36119.denominator"></span> in 2019
+        (<span data-fill="map.measures.arrests_change_since_2019.counties.36119.value" data-format="change"></span>).
+      </p>
+      <div class="chart-pair">
+        <div>
+          <h3>New York State</h3>
+          <div class="chart-box short"><canvas id="chart-arrests-state"></canvas></div>
+        </div>
+        <div>
+          <h3>Westchester</h3>
+          <div class="chart-box short"><canvas id="chart-arrests-westchester"></canvas></div>
+        </div>
+      </div>
+      <p class="source">Source: NYS DCJS, felony arrests of people under 18, by year as given by DCJS. Counts arrests, not young people.</p>
+    </article>
+
+    <!-- Chart 2: share of AO cases kept in criminal court vs moved to Family Court, by year -->
+    <article class="card" id="card-criminal-court">
+      <div class="kicker">2 · Criminal court</div>
+      <h2>About 1 in 6 Adolescent Offender cases stays in criminal court</h2>
+      <p class="commentary">
+        [PLACEHOLDER] Raise the Age sends most 16- and 17-year-olds charged with a felony
+        ("Adolescent Offenders") to Family Court. In <span data-fill="meta.latest_year" data-format="raw"></span>,
+        <span data-fill="headlines.1.value" data-format="pct"></span> of cases statewide stayed in criminal court
+        instead, and the share has barely moved since 2021. Cases the district attorney declined to prosecute are left out.
+      </p>
+      <div class="legend" id="legend-criminal-court"></div>
+      <div class="chart-box"><canvas id="chart-criminal-court"></canvas></div>
+      <p class="source">Source: NYS DCJS, Adolescent Offender arrests disposed, statewide, by year as given by DCJS. Shares exclude cases the DA declined.</p>
+    </article>
+
+    <!-- Chart 3: four places compared -->
+    <article class="card" id="card-by-place">
+      <div class="kicker">3 · Where the case is</div>
+      <h2>Outside the big suburbs and the city, cases stay in criminal court about twice as often</h2>
+      <p class="commentary">
+        [PLACEHOLDER] In <span data-fill="meta.pooled_period" data-format="raw"></span>,
+        <span data-fill="charts.by_place.values.0" data-format="pct"></span> of Adolescent Offender cases in the 55 counties
+        outside New York City, Westchester and Nassau stayed in criminal court. In New York City it was
+        <span data-fill="charts.by_place.values.1" data-format="pct"></span>, in Westchester
+        <span data-fill="charts.by_place.values.2" data-format="pct"></span> and in Nassau
+        <span data-fill="charts.by_place.values.3" data-format="pct"></span>. The map above shows every county.
+      </p>
+      <div class="chart-box short"><canvas id="chart-by-place"></canvas></div>
+      <p class="source">Source: NYS DCJS, Adolescent Offender arrests disposed, <span data-fill="meta.pooled_period" data-format="raw"></span> added together. Shares exclude cases the DA declined.</p>
+    </article>
+
+    <!-- Chart 4: sentences by race outside NYC -->
+    <article class="card" id="card-sentences">
+      <div class="kicker">4 · Sentences</div>
+      <h2>Outside New York City, Black youth are sentenced to a year or more far more often than white youth</h2>
+      <p class="commentary">
+        [PLACEHOLDER] Of Adolescent Offenders sentenced outside New York City in
+        <span data-fill="meta.pooled_period" data-format="raw"></span>,
+        <span data-fill="charts.sentences_by_race.confinement_1yr_plus.0" data-format="pct0"></span> of Black youth received
+        confinement of a year or more, against
+        <span data-fill="charts.sentences_by_race.confinement_1yr_plus.1" data-format="pct0"></span> of white youth.
+        These figures are not adjusted for the charge or the young person's record, so they describe a gap, not its cause.
+      </p>
+      <div class="chart-box short"><canvas id="chart-sentences"></canvas></div>
+      <p class="source">Source: NYS DCJS, Adolescent Offender sentences, 57 counties outside New York City, <span data-fill="meta.pooled_period" data-format="raw"></span> added together. DCJS's category is "1 year or more". Not adjusted for charge or prior record.</p>
+    </article>
+
+    <!-- Chart 5: arrests by race -->
+    <article class="card" id="card-arrests-race">
+      <div class="kicker">5 · Who is arrested</div>
+      <h2>More than half of under-18 felony arrests are of Black youth</h2>
+      <p class="commentary">
+        [PLACEHOLDER] In <span data-fill="meta.pooled_period" data-format="raw"></span>,
+        <span data-fill="charts.arrests_by_race.places.Westchester.shares.0" data-format="pct"></span> of Westchester's
+        <span data-fill="charts.arrests_by_race.places.Westchester.arrests"></span> under-18 felony arrests were of Black youth,
+        about the same as in the rest of the state outside Westchester
+        (<span data-fill="charts.arrests_by_race.places.Rest of state excluding Westchester.shares.0" data-format="pct"></span>).
+        These are shares of arrests, not arrest rates: they don't say how likely a young person in each group is to be arrested.
+      </p>
+      <div class="legend" id="legend-arrests-race"></div>
+      <div class="chart-box"><canvas id="chart-arrests-race"></canvas></div>
+      <p class="source">Source: NYS DCJS, felony arrests of people under 18 by race/ethnicity, <span data-fill="meta.pooled_period" data-format="raw"></span> added together. Each group's share of arrests, not an arrest rate.</p>
+    </article>
+
+  </section>
+
+
+  <!-- ===================================================================
+       5. ABOUT THE DATA
+       =================================================================== -->
+  <section class="about" id="about">
+    <h2>About the data</h2>
+    <p>
+      <strong>Source.</strong> All figures are from the New York State Division of Criminal Justice Services
+      (DCJS), shared with a youth justice coalition WCA belongs to. The tables cover every New York county
+      through <span data-fill="meta.latest_year" data-format="raw"></span>.
+    </p>
+    <p>
+      <strong>Who is counted.</strong> An Adolescent Offender (AO) is a 16- or 17-year-old charged with a felony,
+      a category created by Raise the Age in October 2018. Counts are arrests, not young people: someone arrested
+      twice is counted twice.
+    </p>
+    <p>
+      <strong>"Stayed in criminal court."</strong> Everywhere on this page, the share of cases kept in criminal
+      court leaves out cases the district attorney declined to prosecute, so New York City (where declinations
+      are recorded) can be compared with the rest of the state (where they almost never are).
+    </p>
+    <p>
+      <strong>Years.</strong> DCJS does not say whether its year is the year of arrest or of disposition. Charts
+      use the year as given by DCJS; the latest year may still be incomplete. 2020 and 2021 were COVID-19 years.
+    </p>
+    <p>
+      <strong>Small numbers.</strong> Many counties have only a handful of cases a year, so county figures use
+      <span data-fill="meta.pooled_period" data-format="raw"></span> added together, and counties with fewer than
+      30 cases in the base are marked "too few cases".
+    </p>
+    <p>
+      <strong>Shares, not rates.</strong> A group's share of arrests is not an arrest rate; that would need the
+      youth population by county and race, which this dashboard doesn't yet have. Sentencing figures are not
+      adjusted for charge or prior record.
+    </p>
+    <p class="muted">
+      Tables: CUR-0010 (case outcomes) and CUR-0011 (arrests by race) in WCA's data warehouse. County outlines:
+      U.S. Census Bureau cartographic boundary file, 2025.
+      Data file built <span data-fill="meta.generated" data-format="raw"></span>.
+    </p>
+  </section>
+
+
+  <!-- ===================================================================
+       6. FOOTER
+       =================================================================== -->
+  <footer class="page-footer">
+    Westchester Children's Association · <a href="https://wca4kids.org">wca4kids.org</a>
+    · [PLACEHOLDER: contact, licence]
+  </footer>
+
+</div>
+
+<!-- Scripts: the chart library first, then this page's code. -->
+<script src="vendor/chart.umd.js"></script>
+<script src="charts.js"></script>
+</body>
+</html>
