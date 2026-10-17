@@ -1,65 +1,46 @@
-# Youth Justice Dashboard
+# Updating the dashboard
 
-*Draft README, October 14, 2026. Structure to be settled with Brandon.*
+This folder is the website and a git repository (github.com/brandon-wca/youth-justice-dashboard). A push to `main` publishes the site through Netlify within a minute or two. The numbers are not changed here; see `../update_data_here/README.md`.
 
-| | |
+**Don't touch the files in this folder unless you are authorized to update the dashboard and know what you are doing.** `charts.js` and `styles.css` in particular: a small mistake in either breaks the whole page. If in doubt, ask Brandon.
+
+## Who makes changes
+
+Ask Claude first; do it yourself as the fallback. Claude will name the kind of change (the scenarios below), say what it will touch, ask what it needs, make the change, check the page, log it, and show you before anything is published. A Cowork session can edit files but can't move, delete, commit or push; Claude Code can. Each scenario below gives the Claude path, then "Yourself" for doing it by hand.
+
+## Where things are
+
+| To change… | Edit |
 |---|---|
-| **Status** | Setting up. Data copied in; no framework or code yet. |
-| **Owner** | Brandon Washington, WCA. Claude does the work; Brandon approves every change. |
-| **Published at** | Not yet. Planned: data.wca4kids.org (GitHub + Netlify). |
-| **Data source** | WCA's data warehouse (`brandonwashington/data`), DCJS tables CUR-0010 and CUR-0011. |
+| Words: titles, commentary, captions, "About the data" | `index.html`. Numbers inside sentences are `<span data-fill="…">` tags that `charts.js` fills from `data/data.json`; don't type numbers into the text. |
+| A chart | `charts.js`, the function for that chart (`drawArrestsTrend`, `drawCriminalCourtByYear`, `drawByPlace`, `drawSentences`, `drawArrestsByRace`). Which places a chart compares is set in `../update_data_here/build_data.py`. |
+| The map | `charts.js`, section 3 (measure wording in the Settings block at the top). |
+| Colors, font, spacing, layout | `styles.css`. WCA's colors and font are defined once at the top (part A); everything else refers to them by name. |
 
-## What it is
+## The scenarios
 
-An interactive map of New York's 62 counties plus a short story of five charts on felony arrests of people under 18 and what happens to Adolescent Offender (AO) cases, built from DCJS data. It makes the points in WCA's October 2, 2026 email to the youth justice coalition: arrests are up since 2019, a steady share of AO cases stay in criminal court, that share depends on where the case is, sentences differ by race, and arrests by race.
+**2. Text: wording, grammar, logic, sources.** Tell Claude which passage, what it should say instead (or let Claude draft it), and why. Claude fixes grammar as it goes unless you say not to, keeps numbers as `data-fill` tags, updates "About the data" and the chart source lines together when a source changes, and shows old and new text side by side before committing. *Yourself:* edit `index.html`, preview (below), log, commit, push.
 
-## Files
+**3. New indicator, or layout, color or design change.** Always a code change. For an indicator, tell Claude which measure, from which table and column, where it goes (map, chart or headline) and what it is compared with; for design, what exactly and where (a screenshot helps). Claude checks the data supports it first (if not, it becomes a data change plus a script change), lists every file it will touch, checks any new color for color-blind readers, builds it, and shows screenshots at desktop and phone width. *Yourself:* not recommended without code experience; at minimum follow the "Where things are" table, preview, log, commit, push.
 
-| File | What it is |
-|---|---|
-| `README.md` | This file: what the dashboard is, what's in the folder, how to work on it, and the change log. |
-| `update_data_here/` | The inputs, copied unchanged from the warehouse, plus the build script. Not pushed to git. |
-| `update_data_here/build_data.py` | Turns the CSVs into `data/data.json` and copies the outlines to `data/Geography.json`. Run `python update_data_here/build_data.py` after any input changes. |
-| `update_data_here/CHANGELOG.md` | Every change to the input files: what, when, by whom, from where. |
-| `update_data_here/CUR-0010_ao-jo-case-outcomes_ny-counties.csv` | What happened to AO and JO arrests (DA declined, moved to Family Court, stayed in criminal court, outcomes, sentences), with shares. Every county, NYC, the rest of the state and the state, 2016–2025. Feeds the map and charts 2–4. |
-| `update_data_here/CUR-0011_under-18-felony-arrests-by-race_ny-counties.csv` | Felony arrests of people under 18 by race, each group's share, and change since 2019. Same places, 2019–2025. Feeds the map and charts 1 and 5. |
-| `update_data_here/STG-0016_county-boundaries_nys.geojson` | Outlines of New York's 62 counties (U.S. Census Bureau, 2025), with each county's 5-digit code and name. Holds no numbers. |
-| `data/` | What the page reads. Written by the script; never edited by hand. Pushed to git. |
-| `data/data.json` | The numbers for the headlines, map and charts. |
-| `data/Geography.json` | The county outlines, an exact copy of `STG-0016` under the name the page expects. |
-| `index.html` | The page: the words (titles, commentary, captions) and the empty boxes the charts draw into. Numbers inside sentences are filled from `data.json` by `charts.js`. |
-| `styles.css` | All the styling: WCA colors and font (defined once, at the top), page basics, the map section. |
-| `charts.js` | Draws everything: headline tiles, the map, the five charts. Part one is helpers (colors, number formatting, tooltip); part two is this page. Reads `data/data.json` and `data/Geography.json`. |
-| `vendor/chart.umd.js` | Chart.js 4.4.4, the chart library (with its licence file). Kept in the folder so the page never calls out to another site. |
-| `fonts/` | Lexend, WCA's font, served from the folder. |
+**4. Under construction.** Two options, both done by a person in a minute. *Freeze* (the live site stays as it is while work continues): Netlify → Deploys → "Stop auto publishing"; undo it with "Start auto publishing" when done. *Hide* (visitors see a holding page): replace `index.html` with a one-paragraph "temporarily unavailable" page, commit and push; restore the real file from git afterwards. Password-protecting the site needs Netlify's paid plan. Claude's role: remind you which option fits, and restore afterwards.
 
-Each CSV has a dataset doc in the warehouse (same name, `.md`) with column meanings and caveats. Read it before using the table.
+**5. A library or component fails** (the page loads but charts or the map don't draw, or the browser shows errors). Tell Claude what you see and where. Claude reads the browser's error messages, reproduces the problem, names the cause only with evidence (the error text, what triggers it), proposes the smallest fix (usually one file in `resources/`), shows before and after, and waits for your approval. If it can't reach confidence it says so. *Yourself:* restore the last working version from git (scenario 10).
 
-**To look at the page:** it has to be opened through a web server (a browser won't load the data files straight from a folder). From the `youth_justice` folder run `python -m http.server 8000`, then open `http://localhost:8000/` in a browser. Or push to GitHub and use the Netlify preview.
+**6. The dashboard is slow.** Claude measures first (file sizes, load time, where the browser spends its time), reports the numbers, and proposes fixes ranked by gain and risk. Nothing changes without approval. The likely suspect today is the county outline file (`data/Geography.json`, 440 KB); it can be simplified without visible loss.
 
-## How to work on this dashboard
+**7. GitHub or Netlify problems; accounts and ownership.** *Instructions to come from Brandon.* Headings to fill in: Netlify build failed (read the deploy log in Netlify → Deploys); the site isn't updating after a push (check which branch Netlify deploys and that auto publishing is on); a push is rejected (pull first, or check branch protection); accounts and access (who owns the GitHub repository and the Netlify site, how to add a colleague, moving the repository to a WCA organization, the custom domain, making the repository private). Claude's role: read the deploy log and explain it; the fixes are done by a person.
 
-1. **Data.** Never edit a CSV by hand. To update one, re-copy the curated table from the warehouse into `update_data_here/`, run the script, then add an entry to `update_data_here/CHANGELOG.md`. Only reviewed, release-ready tables get published.
-2. **Words.** Titles, commentary and captions are edited in `index.html`. Don't type numbers into sentences; use a `data-fill` span (see the examples there) so they come from `data.json`.
-3. **Charts and style.** Chart changes go in `charts.js` (one function per chart). Styling goes in `styles.css`. *Full protocol to be written.*
-4. **Publishing.** Changes go on a branch and through a pull request. Netlify builds a preview. Brandon reviews the changes and the preview, then merges. Nothing is pushed straight to main.
-5. **Every change** gets a line in the change log below. Data changes also go in `update_data_here/CHANGELOG.md`.
+**10. Restore a previous version of the page.** Git holds every version. Ask Claude Code to restore a file or the whole folder to a named commit, or in GitHub Desktop open History, pick the commit, and revert. Data restores are in `../update_data_here/README.md`.
 
-## Before anything is published
+## Steps, whoever makes the change
 
-- [ ] Brandon reviews CUR-0010 and CUR-0011 and fills in `reviewed_by` in their dataset docs.
-- [ ] Check whether DCJS publishes a small-numbers rule. If not, hide counts under 5, with complementary suppression.
-- [ ] Recalculate chart 2 without DA declines and show Brandon the new values.
-- [ ] Clear open fact checks FC-0030 and FC-0031.
+1. Make the change (Claude, or yourself per the scenario).
+2. Look at it. Browsers won't load the data files straight from a folder, so from this folder run `python -m http.server 8000` and open `http://localhost:8000/`. Check a wide window and a narrow one (phone).
+3. Add a line to `CHANGELOG.md`: date, who, what, why. Claude writes it when Claude made the change, naming who asked.
+4. Commit with a one-line message saying what changed, then push to `main`. (Once the review process is set up: open a pull request instead and merge after review.)
+5. Check the live site after Netlify finishes.
 
-## Change log
+## The change log
 
-Newest first.
-
-| Date | Who | Change |
-|---|---|---|
-| 2026-10-14 | Claude (Cowork), for Brandon | First draft of the page (v1): `index.html`, `styles.css`, `charts.js`, plus `vendor/` (Chart.js) and `fonts/` (Lexend). All text is placeholder. `build_data.py` now marks change values with unit "change". |
-| 2026-10-14 | Claude (Cowork), for Brandon | Reorganised: inputs and the script in `update_data_here/` (not pushed to git), outputs in `data/`. The script now also copies the outlines to `data/Geography.json`. |
-| 2026-10-14 | Claude (Cowork), for Brandon | Added `build_data.py` (CSV → `data.json`) and the first `data.json`. The script's change-log step is muted until the log format is final. |
-| 2026-10-14 | Claude (Cowork), for Brandon | Added the county outlines for the map (`data/STG-0016_county-boundaries_nys.geojson`, from the warehouse). |
-| 2026-10-14 | Claude (Cowork), for Brandon | Created the folder. Copied CUR-0010 and CUR-0011 from the warehouse into `data/`. Drafted this README and `data/CHANGELOG.md`. |
+`CHANGELOG.md` gets a line for every change to this folder that is committed: words, charts, styling, data files, documentation. Git keeps the full detail (`git log`, or the Commits tab on GitHub); the change log is the plain-language summary.

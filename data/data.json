@@ -1,7 +1,7 @@
 {
   "meta": {
     "dashboard": "Youth Justice Dashboard",
-    "generated": "2026-10-14 16:19 (local time)",
+    "generated": "2026-10-16 21:26 (local time)",
     "built_by": "build_data.py",
     "latest_year": 2025,
     "pooled_period": "2023-2025",
@@ -521,10 +521,18 @@
             "denominator": 2,
             "too_few": true
           }
+        },
+        "highlight": {
+          "name": "Westchester",
+          "value": 13.9,
+          "numerator": 57,
+          "denominator": 409,
+          "too_few": false
         }
       },
-      "arrests_change_since_2019": {
+      "arrests_change": {
         "label": "Change in felony arrests of people under 18, 2019 to 2025",
+        "base_year": 2019,
         "unit": "change",
         "description": "How many more or fewer felony arrests of people under 18 there were in 2025 than in 2019.",
         "source": "CUR-0011, change_since_2019_pct",
@@ -969,6 +977,13 @@
             "denominator": 2,
             "too_few": true
           }
+        },
+        "highlight": {
+          "name": "Westchester",
+          "value": 4.9,
+          "numerator": 172,
+          "denominator": 164,
+          "too_few": false
         }
       },
       "black_share_of_arrests": {
@@ -1417,6 +1432,13 @@
             "denominator": 3,
             "too_few": true
           }
+        },
+        "highlight": {
+          "name": "Westchester",
+          "value": 52.2,
+          "numerator": 248,
+          "denominator": 475,
+          "too_few": false
         }
       }
     }
@@ -1582,6 +1604,10 @@
         "White",
         "Asian",
         "Other or unknown"
+      ],
+      "show": [
+        "Westchester",
+        "Rest of state excluding Westchester"
       ],
       "places": {
         "Westchester": {

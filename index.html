@@ -22,6 +22,21 @@
   The words themselves (titles, commentary, captions) live here and are edited here.
   Text marked [PLACEHOLDER] is a first draft for Brandon to rewrite.
 
+  FIXED FACTS TYPED ON PURPOSE (not from the tables, so they are allowed in the text):
+    * 55 counties outside NYC, Westchester and Nassau; 57 counties outside NYC  (how the comparison groups are defined)
+    * "fewer than 30 cases" = the small-numbers threshold in the tables
+    * Raise the Age began in October 2018; 2020 and 2021 were COVID-19 years
+    * the county outlines are the U.S. Census Bureau's 2025 file
+  Everything else that is a number comes from data.json.
+
+  CLAIMS TO RE-CHECK AFTER EVERY DATA UPDATE. The numbers refill themselves; these words don't.
+    * Chart 1: "fell sharply in the COVID-19 years and have climbed since"; "moved less" (Westchester vs the state)
+    * Chart 2: "About 1 in 6 ... stays in criminal court"; "has barely moved since <first year>"
+    * Chart 3: "about twice as often" (55 counties vs NYC, Westchester, Nassau)
+    * Chart 4: "far more often" (Black vs white youth)
+    * Chart 5: "More than half ... are of Black youth"; "about the same as in the rest of the state"
+    * Headline tiles are numbers only; nothing to re-check.
+
   PAGE SECTIONS, top to bottom
     1. Header
     2. Headline numbers (four tiles)
@@ -108,16 +123,16 @@
          (they can't share one axis: 6,000 vs 170). -->
     <article class="card" id="card-arrests">
       <div class="kicker">1 · Arrests</div>
-      <h2>Felony arrests of people under 18 are up <span data-fill="headlines.0.compare.value" data-format="change0"></span> since 2019</h2>
+      <h2>Felony arrests of people under 18 are <span data-fill="headlines.0.compare.value" data-format="direction0"></span> since <span data-fill="meta.base_year" data-format="raw"></span></h2>
       <p class="commentary">
         [PLACEHOLDER] Statewide, <span data-fill="headlines.0.value"></span> people under 18 were arrested
         for a felony in <span data-fill="meta.latest_year" data-format="raw"></span>, compared with
-        <span data-fill="map.measures.arrests_change_since_2019.state.denominator"></span> in 2019. Arrests fell
+        <span data-fill="map.measures.arrests_change.state.denominator"></span> in <span data-fill="meta.base_year" data-format="raw"></span>. Arrests fell
         sharply in the COVID-19 years and have climbed since. Westchester's count moved less:
-        <span data-fill="map.measures.arrests_change_since_2019.counties.36119.numerator"></span> in
+        <span data-fill="map.measures.arrests_change.highlight.numerator"></span> in
         <span data-fill="meta.latest_year" data-format="raw"></span> against
-        <span data-fill="map.measures.arrests_change_since_2019.counties.36119.denominator"></span> in 2019
-        (<span data-fill="map.measures.arrests_change_since_2019.counties.36119.value" data-format="change"></span>).
+        <span data-fill="map.measures.arrests_change.highlight.denominator"></span> in <span data-fill="meta.base_year" data-format="raw"></span>
+        (<span data-fill="map.measures.arrests_change.highlight.value" data-format="change"></span>).
       </p>
       <div class="chart-pair">
         <div>
@@ -140,7 +155,7 @@
         [PLACEHOLDER] Raise the Age sends most 16- and 17-year-olds charged with a felony
         ("Adolescent Offenders") to Family Court. In <span data-fill="meta.latest_year" data-format="raw"></span>,
         <span data-fill="headlines.1.value" data-format="pct"></span> of cases statewide stayed in criminal court
-        instead, and the share has barely moved since 2021. Cases the district attorney declined to prosecute are left out.
+        instead, and the share has barely moved since <span data-fill="charts.criminal_court_by_year.years.0" data-format="raw"></span>. Cases the district attorney declined to prosecute are left out.
       </p>
       <div class="legend" id="legend-criminal-court"></div>
       <div class="chart-box"><canvas id="chart-criminal-court"></canvas></div>

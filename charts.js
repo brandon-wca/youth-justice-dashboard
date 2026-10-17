@@ -102,6 +102,14 @@ WCA.fmt = {
     return sign + Math.abs(Number(n)).toFixed(decimals) + "%";
   },
 
+  /* 10.1 -> "up 10.1%", -4.9 -> "down 4.9%", 0 -> "unchanged": the direction in words, for headings */
+  direction: function (n, decimals) {
+    if (n === null || n === undefined) return "n/a";
+    if (decimals === undefined) decimals = 1;
+    if (n === 0) return "unchanged";
+    return (n > 0 ? "up " : "down ") + Math.abs(Number(n)).toFixed(decimals) + "%";
+  },
+
   /* Pick the right formatter for a unit named in data.json ("count", "%", "change") */
   byUnit: function (n, unit) {
     if (unit === "%") return WCA.fmt.pct(n);
@@ -130,7 +138,7 @@ WCA.get = function (object, path) {
 
 /* Fill every element with a data-fill attribute:
      <span data-fill="headlines.0.value" data-format="count"></span>
-   data-format is count (default), pct or change. */
+   data-format is count (default), pct, change, direction (the sign in words: "up 10.1%"), or raw. */
 WCA.fillNumbers = function (data) {
   var elements = document.querySelectorAll("[data-fill]");
   for (var i = 0; i < elements.length; i++) {
@@ -142,6 +150,8 @@ WCA.fillNumbers = function (data) {
     else if (format === "pct0") el.textContent = WCA.fmt.pct(value, 0);
     else if (format === "change") el.textContent = WCA.fmt.change(value);
     else if (format === "change0") el.textContent = WCA.fmt.change(value, 0);
+    else if (format === "direction") el.textContent = WCA.fmt.direction(value, 1);
+    else if (format === "direction0") el.textContent = WCA.fmt.direction(value, 0);
     else el.textContent = WCA.fmt.count(value);
   }
 };
@@ -326,9 +336,6 @@ WCA.plugins.pointNotes = {
 var DATA_FILE = "data/data.json";
 var GEOGRAPHY_FILE = "data/Geography.json";
 
-/* The county shown in the side panel when the page opens. 36119 = Westchester. */
-var DEFAULT_COUNTY = "36119";
-
 /* How each map measure's counts are written out. The key matches data.json "map.measures".
      counts  how to describe the two counts behind a value: {n} and {d} are filled in,
              {latest} and {base} are the years from data.json "meta"
@@ -336,7 +343,7 @@ var DEFAULT_COUNTY = "36119";
    (How the value itself is written, 13.9% or +4.9%, comes from the measure's "unit" in data.json.) */
 var MEASURE_TEXT = {
   criminal_court_share:      { counts: "{n} of {d} cases",                      noun: "cases" },
-  arrests_change_since_2019: { counts: "{n} arrests in {latest}, {d} in {base}", noun: "arrests" },
+  arrests_change:            { counts: "{n} arrests in {latest}, {d} in {base}", noun: "arrests" },
   black_share_of_arrests:    { counts: "{n} of {d} arrests",                    noun: "arrests" },
 };
 
@@ -466,7 +473,7 @@ function drawMap(data, geography) {
   select.addEventListener("change", function () { showMeasure(select.value); });
 
   showMeasure(map.data.default_measure);
-  selectCounty(DEFAULT_COUNTY);
+  selectCounty(map.data.highlight_county);   /* the side panel opens on the highlighted county */
 }
 
 /* Color every county for one measure, and rewrite the legend and source line */
@@ -800,12 +807,12 @@ function drawSentences(data) {
 }
 
 
-/* Chart 5: each group's share of under-18 felony arrests, Westchester vs the rest of
-   the state. Grouped horizontal bars, one row per group. */
+/* Chart 5: each group's share of under-18 felony arrests in two places (which two is set in
+   build_data.py and arrives as "show"). Grouped horizontal bars, one row per group. */
 function drawArrestsByRace(data) {
   var chart = data.charts.arrests_by_race;
-  var placeA = "Westchester";
-  var placeB = "Rest of state excluding Westchester";
+  var placeA = chart.show[0];
+  var placeB = chart.show[1];
   var a = chart.places[placeA];
   var b = chart.places[placeB];
 
